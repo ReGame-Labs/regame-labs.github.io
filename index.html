@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ReGame Labs</title>
+    <meta
+      name="description"
+      content="ReGame Labs: decompilaciones matching de juegos de PlayStation. Digimon Digital Card Battle y Digimon World 3."
+    />
+    <meta property="og:title" content="ReGame Labs" />
+    <meta property="og:description" content="Matching decompilations of PlayStation classics." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://regame-labs.github.io/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      // apply the saved or system theme before the first paint
+      try {
+        var saved = JSON.parse(localStorage.getItem('regame-labs-prefs') || '{}').state
+        var theme = (saved && saved.theme) || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark')
+        document.documentElement.dataset.theme = theme
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
