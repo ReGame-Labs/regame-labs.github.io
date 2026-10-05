@@ -1,36 +1,36 @@
 # regame-labs.github.io
 
-Sitio de la organización [ReGame Labs](https://github.com/ReGame-Labs), publicado
-en <https://regame-labs.github.io/>.
+The website of the [ReGame Labs](https://github.com/ReGame-Labs) organization,
+published at <https://regame-labs.github.io/>.
 
-Hecho con [Vite](https://vite.dev), React, TypeScript y
-[Zustand](https://zustand.docs.pmnd.rs). El progreso de cada edición se consulta
-en vivo en la API de [decomp.dev](https://decomp.dev); si no responde, se muestran
-los últimos números publicados, que viven en `src/data/projects.ts`.
+Built with [Vite](https://vite.dev), React, TypeScript and
+[Zustand](https://zustand.docs.pmnd.rs). Each release's progress is read live
+from the [decomp.dev](https://decomp.dev) API; when it doesn't answer, the page
+shows the last published numbers, which live in `src/data/projects.ts`.
 
-## Desarrollo
+## Development
 
 ```sh
 npm install
 npm run dev
 ```
 
-`npm run build` compila a `dist/` y `npm run lint` pasa oxlint.
+`npm run build` builds into `dist/` and `npm run lint` runs oxlint.
 
-## Estructura
+## Layout
 
-| Ruta | Qué hay |
+| Path | Contents |
 |---|---|
-| `src/data/projects.ts` | Los proyectos, sus ediciones y la instantánea de progreso |
-| `src/store/useSiteStore.ts` | Estado global (Zustand): idioma, tema y progreso de decomp.dev |
-| `src/lib/i18n.ts` | Textos en español e inglés |
-| `src/components/` | Cabecera, portada y tarjetas de proyecto |
+| `src/data/projects.ts` | The projects, their releases and the progress snapshot |
+| `src/store/useSiteStore.ts` | Global state (Zustand): language, theme and decomp.dev progress |
+| `src/lib/i18n.ts` | Spanish and English text |
+| `src/components/` | Header, hero and project cards |
 
-Para agregar un proyecto, añade una entrada en `src/data/projects.ts` con su
-repositorio, sus ediciones (el nombre del ejecutable es el id de versión en
-decomp.dev) y una instantánea de su progreso.
+To add a project, add an entry to `src/data/projects.ts` with its repository,
+its releases (the executable name is the version id on decomp.dev) and a
+snapshot of its progress.
 
-## Despliegue
+## Deployment
 
-Cada push a `main` compila el sitio y lo publica en GitHub Pages con
+Every push to `main` builds the site and publishes it to GitHub Pages with
 `.github/workflows/deploy.yaml`.
