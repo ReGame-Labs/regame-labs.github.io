@@ -5,6 +5,8 @@ interface ImportMetaEnv {
   readonly VITE_CHAT_API_URL?: string
   /** Turnstile site key the chat uses before a first message */
   readonly VITE_TURNSTILE_SITE_KEY?: string
+  /** The Open Collective page; without it the support links stay hidden */
+  readonly VITE_OPENCOLLECTIVE_URL?: string
 }
 
 interface ImportMeta {

@@ -115,6 +115,13 @@ const es = {
       generic: 'Algo salió mal. Inténtalo de nuevo.',
     } as Record<string, string>,
   },
+  support: {
+    short: 'Apoyar',
+    title: 'Apoya a ReGame Labs en Open Collective',
+    cta: 'Apoyar el proyecto',
+    footer: '¿Te sirve lo que hacemos? Cada donación y cada gasto son públicos en',
+    footerLink: 'Open Collective',
+  },
   footer: {
     note: 'Proyectos de preservación y estudio. No distribuimos datos ni binarios de los juegos.',
     trademarks: 'Los nombres de los juegos son marcas de sus respectivos dueños.',
@@ -237,6 +244,13 @@ const en: Messages = {
       invalid_email: 'That email does not look right.',
       generic: 'Something went wrong. Please try again.',
     },
+  },
+  support: {
+    short: 'Support',
+    title: 'Support ReGame Labs on Open Collective',
+    cta: 'Support the project',
+    footer: 'Like what we do? Every donation and every expense is public on',
+    footerLink: 'Open Collective',
   },
   footer: {
     note: 'Preservation and research projects. We distribute no game data or binaries.',

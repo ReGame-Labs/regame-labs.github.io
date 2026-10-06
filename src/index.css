@@ -18,6 +18,8 @@
   --teal: #39e5c6;
   --success: #5cf08a;
   --warning: #ffcc4d;
+  --heart: #ff5f87;
+  --heart-light: #ffc2d1;
 
   --star: #ffffff;
   --star-2: #8fd8ff;
@@ -59,6 +61,8 @@
   --teal: #0e9e86;
   --success: #12924d;
   --warning: #a46a00;
+  --heart: #d6336c;
+  --heart-light: #ff9fbc;
 
   --star: #7d84c9;
   --star-2: #5b4be0;
@@ -282,6 +286,42 @@ h3 {
   color: var(--text);
 }
 
+/* Support */
+.support-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 12px;
+  background: var(--surface);
+  color: var(--text);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  text-decoration: none;
+}
+
+.support-link:hover {
+  color: var(--heart);
+}
+
+.support-link:hover svg {
+  animation: heartbeat 0.6s steps(2) infinite;
+}
+
+@keyframes heartbeat {
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.button svg {
+  flex: none;
+}
+
+.footer__support a {
+  color: var(--heart);
+}
+
 /* Hero */
 .hero {
   padding: 88px 0 72px;
@@ -327,6 +367,7 @@ h3 {
 .button {
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   height: 44px;
   padding: 0 20px;
   background: var(--surface);
@@ -1166,8 +1207,27 @@ h3 {
     display: none;
   }
 
+  .header__inner {
+    gap: 12px;
+  }
+
   .header__actions {
     margin-left: auto;
+    gap: 6px;
+  }
+
+  /* only the heart fits next to the language and theme buttons */
+  .support-link {
+    padding: 0 9px;
+  }
+
+  .support-link span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
   }
 
   .hero {

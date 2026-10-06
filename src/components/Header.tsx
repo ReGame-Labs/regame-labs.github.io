@@ -1,7 +1,10 @@
 import { ORG } from '../data/projects'
 import type { Locale } from '../lib/i18n'
+import { heartSprite } from '../lib/pixels'
+import { SUPPORT_URL } from '../lib/support'
 import { useMessages, useSiteStore } from '../store/useSiteStore'
 import { Logo } from './Logo'
+import { PixelSprite } from './PixelSprite'
 
 const locales: Locale[] = ['es', 'en']
 
@@ -27,6 +30,12 @@ export function Header() {
           </a>
         </nav>
         <div className="header__actions">
+          {SUPPORT_URL && (
+            <a className="support-link" href={SUPPORT_URL} target="_blank" rel="noreferrer" title={t.support.title}>
+              <PixelSprite make={heartSprite} size={16} />
+              <span>{t.support.short}</span>
+            </a>
+          )}
           <div className="segmented" role="group" aria-label={t.language}>
             {locales.map((l) => (
               <button

@@ -103,6 +103,22 @@ export const satelliteSprite = (): PixelGrid =>
     },
   )
 
+/** A heart with a highlight, for the support links */
+export const heartSprite = (): PixelGrid =>
+  fromRows(
+    [
+      '.hh...hh.',
+      'hlhh.hhhh',
+      'hlhhhhhhh',
+      'hhhhhhhhh',
+      '.hhhhhhh.',
+      '..hhhhh..',
+      '...hhh...',
+      '....h....',
+    ],
+    { h: 'var(--heart)', l: 'var(--heart-light)' },
+  )
+
 /** A speech bubble with three dots, for the chat button */
 export const bubbleSprite = (): PixelGrid =>
   fromRows(

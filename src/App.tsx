@@ -6,6 +6,7 @@ import { ProjectCard } from './components/ProjectCard'
 import { Resources } from './components/Resources'
 import { Starfield } from './components/Starfield'
 import { projects } from './data/projects'
+import { SUPPORT_URL } from './lib/support'
 import { useMessages, useSiteStore } from './store/useSiteStore'
 
 const year = new Date().getFullYear()
@@ -70,6 +71,14 @@ export default function App() {
       <footer className="footer">
         <div className="container footer__inner">
           <p>{t.footer.note}</p>
+          {SUPPORT_URL && (
+            <p className="footer__support">
+              {t.support.footer}{' '}
+              <a href={SUPPORT_URL} target="_blank" rel="noreferrer">
+                {t.support.footerLink}
+              </a>
+            </p>
+          )}
           <p className="footer__muted">
             {t.footer.trademarks} © {year} ReGame Labs
           </p>

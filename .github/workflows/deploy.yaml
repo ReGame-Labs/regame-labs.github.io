@@ -30,6 +30,7 @@ jobs:
         # the chat widget stays hidden until both repository variables exist
         VITE_CHAT_API_URL: ${{ vars.CHAT_API_URL }}
         VITE_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
+        VITE_OPENCOLLECTIVE_URL: ${{ vars.OPENCOLLECTIVE_URL }}
 
     - uses: actions/upload-pages-artifact@v5
       with:

@@ -1,6 +1,7 @@
 import { ORG, projects } from '../data/projects'
 import { formatNumber } from '../lib/i18n'
-import { planetSprite, satelliteSprite } from '../lib/pixels'
+import { heartSprite, planetSprite, satelliteSprite } from '../lib/pixels'
+import { SUPPORT_URL } from '../lib/support'
 import { useMessages, useSiteStore } from '../store/useSiteStore'
 import { PixelSprite } from './PixelSprite'
 
@@ -25,6 +26,12 @@ export function Hero() {
           <a className="button" href={`https://github.com/${ORG}`} target="_blank" rel="noreferrer">
             {t.hero.ctaGithub}
           </a>
+          {SUPPORT_URL && (
+            <a className="button" href={SUPPORT_URL} target="_blank" rel="noreferrer">
+              <PixelSprite make={heartSprite} size={14} />
+              {t.support.cta}
+            </a>
+          )}
         </div>
         <dl className="stats">
           <div>

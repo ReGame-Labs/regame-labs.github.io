@@ -42,6 +42,12 @@ only renders when the build gets `VITE_CHAT_API_URL` and
 `CHAT_API_URL` and `TURNSTILE_SITE_KEY`. To try it locally, run the Worker and
 copy `.env.example` to `.env.development.local`.
 
+## Support links
+
+The header, the hero and the footer link to the Open Collective page. They
+only render when the build gets `VITE_OPENCOLLECTIVE_URL`, from the repository
+variable `OPENCOLLECTIVE_URL` in CI.
+
 ## Deployment
 
 Every push to `main` builds the site and publishes it to GitHub Pages with
