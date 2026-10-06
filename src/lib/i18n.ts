@@ -116,8 +116,7 @@ const en: Messages = {
 
 export const messages: Record<Locale, Messages> = { es, en }
 
-export const detectLocale = (): Locale =>
-  typeof navigator !== 'undefined' && navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en'
+export const DEFAULT_LOCALE: Locale = 'en'
 
 export const formatDate = (iso: string, locale: Locale) =>
   new Date(`${iso}T12:00:00Z`).toLocaleDateString(locale === 'es' ? 'es' : 'en-US', {

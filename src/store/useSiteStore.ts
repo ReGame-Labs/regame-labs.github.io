@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 import { ORG, projects, type Measures } from '../data/projects'
-import { detectLocale, messages, type Locale } from '../lib/i18n'
+import { DEFAULT_LOCALE, messages, type Locale } from '../lib/i18n'
 
 export type Theme = 'dark' | 'light'
 
@@ -70,7 +70,7 @@ const prefersLight = () =>
 export const useSiteStore = create<SiteState>()(
   persist(
     (set, get) => ({
-      locale: detectLocale(),
+      locale: DEFAULT_LOCALE,
       theme: prefersLight() ? 'light' : 'dark',
       progress: initialProgress(),
       progressRequested: false,
