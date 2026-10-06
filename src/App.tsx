@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Chat } from './components/Chat'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { ProjectCard } from './components/ProjectCard'
@@ -74,6 +75,8 @@ export default function App() {
           </p>
         </div>
       </footer>
+
+      <Chat />
     </>
   )
 }

@@ -26,6 +26,10 @@ jobs:
     - run: npm run lint
 
     - run: npm run build
+      env:
+        # the chat widget stays hidden until both repository variables exist
+        VITE_CHAT_API_URL: ${{ vars.CHAT_API_URL }}
+        VITE_TURNSTILE_SITE_KEY: ${{ vars.TURNSTILE_SITE_KEY }}
 
     - uses: actions/upload-pages-artifact@v5
       with:

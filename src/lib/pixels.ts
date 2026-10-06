@@ -102,3 +102,26 @@ export const satelliteSprite = (): PixelGrid =>
       e: 'var(--px-edge)',
     },
   )
+
+/** A speech bubble with three dots, for the chat button */
+export const bubbleSprite = (): PixelGrid =>
+  fromRows(
+    [
+      '..ooooooooooo..',
+      '.offfffffffffo.',
+      'offfffffffffffo',
+      'offfffffffffffo',
+      'offfdffdffdfffo',
+      'offfdffdffdfffo',
+      'offfffffffffffo',
+      '.offfffffffffo.',
+      '..ooofooooooo..',
+      '....ofo........',
+      '....oo.........',
+    ],
+    {
+      o: 'var(--accent-strong)',
+      f: 'var(--accent-contrast)',
+      d: 'var(--accent-strong)',
+    },
+  )
