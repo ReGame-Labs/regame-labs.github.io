@@ -36,7 +36,7 @@ const es = {
       },
       {
         title: 'Sin datos del juego',
-        body: 'Los repositorios contienen solo código y herramientas. Para compilar necesitas tu propia copia del juego; el CI usa los binarios desde un repositorio privado.',
+        body: 'Los repositorios contienen solo código y herramientas. Para compilar necesitas tu propia copia del juego.',
       },
       {
         title: 'Varias ediciones, un código',
@@ -93,7 +93,7 @@ const en: Messages = {
       },
       {
         title: 'No game data',
-        body: 'The repositories hold only code and tools. You need your own copy of the game to build; CI reads the binaries from a private repository.',
+        body: 'The repositories hold only code and tools. You need your own copy of the game to build.',
       },
       {
         title: 'Several releases, one source',
