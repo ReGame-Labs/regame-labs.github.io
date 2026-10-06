@@ -6,7 +6,7 @@ export type Locale = 'es' | 'en'
 const es = {
   nav: { projects: 'Proyectos', approach: 'Cómo trabajamos', resources: 'Recursos', github: 'GitHub' },
   hero: {
-    eyebrow: 'Decompilación de PlayStation',
+    eyebrow: 'Decompilación de videojuegos',
     title: 'Devolvemos los clásicos a su código fuente.',
     lead: 'ReGame Labs reconstruye juegos de PlayStation en C que, al compilarse con las herramientas originales, produce los mismos binarios byte a byte.',
     ctaProjects: 'Ver proyectos',
@@ -94,7 +94,7 @@ export type Messages = typeof es
 const en: Messages = {
   nav: { projects: 'Projects', approach: 'How we work', resources: 'Resources', github: 'GitHub' },
   hero: {
-    eyebrow: 'PlayStation decompilation',
+    eyebrow: 'Game decompilation',
     title: 'Bringing the classics back to source.',
     lead: 'ReGame Labs rebuilds PlayStation games as C source that, compiled with the original tools, produces the very same binaries, byte for byte.',
     ctaProjects: 'See projects',
