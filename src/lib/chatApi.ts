@@ -6,10 +6,13 @@ export const chatEnabled = API !== '' && TURNSTILE_SITE_KEY !== ''
 
 export interface ChatMessage {
   id: number
-  sender: 'visitor' | 'owner'
+  sender: 'visitor' | 'owner' | 'bot'
   body: string
   createdAt: number
 }
+
+/** Who answers the conversation: the assistant, or a person once it handed over */
+export type Handler = 'bot' | 'owner'
 
 /** `code` is the Worker's error code, or 'network' when it couldn't be reached */
 export class ChatError extends Error {
@@ -43,16 +46,19 @@ export const chatApi = {
   status: () => request<{ online: boolean }>('/status'),
 
   start: (message: string, locale: Locale, turnstileToken: string) =>
-    request<{ token: string; conversationId: number; messages: ChatMessage[] }>('/conversations', {
+    request<{ token: string; conversationId: number; messages: ChatMessage[]; handler: Handler }>('/conversations', {
       method: 'POST',
       json: { message, locale, turnstileToken },
     }),
 
   send: (token: string, message: string) =>
-    request<{ message: ChatMessage }>('/messages', { method: 'POST', token, json: { message } }),
+    request<{ message: ChatMessage; handler: Handler }>('/messages', { method: 'POST', token, json: { message } }),
 
   poll: (token: string, after: number) =>
-    request<{ messages: ChatMessage[]; online: boolean; email: string | null }>(`/messages?after=${after}`, { token }),
+    request<{ messages: ChatMessage[]; online: boolean; email: string | null; handler: Handler }>(
+      `/messages?after=${after}`,
+      { token },
+    ),
 
   setEmail: (token: string, email: string | null) =>
     request<{ email: string | null }>('/contact', { method: 'PUT', token, json: { email } }),

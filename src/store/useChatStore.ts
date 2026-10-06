@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
-import { ChatError, chatApi, type ChatMessage } from '../lib/chatApi'
+import { ChatError, chatApi, type ChatMessage, type Handler } from '../lib/chatApi'
 import type { Locale } from '../lib/i18n'
 
 interface ChatState {
@@ -13,6 +13,9 @@ interface ChatState {
   open: boolean
   messages: ChatMessage[]
   online: boolean
+  handler: Handler
+  /** When the visitor last wrote to the assistant, until its answer arrives */
+  waitingSince: number | null
   sending: boolean
   error: string | null
   turnstileToken: string | null
@@ -33,10 +36,13 @@ const merge = (current: ChatMessage[], incoming: ChatMessage[]) => {
   return added.length ? [...current, ...added].sort((a, b) => a.id - b.id) : current
 }
 
+/** How long the widget shows the assistant typing before it gives up waiting */
+const TYPING_TIMEOUT_MS = 60000
+
 const errorCode = (error: unknown) => (error instanceof ChatError ? error.code : 'generic')
 
 export const unreadCount = (s: Pick<ChatState, 'messages' | 'lastSeenId'>) =>
-  s.messages.filter((m) => m.sender === 'owner' && m.id > s.lastSeenId).length
+  s.messages.filter((m) => m.sender !== 'visitor' && m.id > s.lastSeenId).length
 
 export const useChatStore = create<ChatState>()(
   persist(
@@ -47,6 +53,8 @@ export const useChatStore = create<ChatState>()(
       open: false,
       messages: [],
       online: false,
+      handler: 'bot',
+      waitingSince: null,
       sending: false,
       error: null,
       turnstileToken: null,
@@ -68,10 +76,20 @@ export const useChatStore = create<ChatState>()(
           const data = await chatApi.poll(token, after)
           // the token may have been answered while this request was in flight
           if (get().token !== token) return
-          set((s) => ({ messages: merge(s.messages, data.messages), online: data.online, email: data.email }))
+          const answered = data.handler === 'owner' || data.messages.some((m) => m.sender !== 'visitor')
+          const expired = (since: number | null) => since !== null && Date.now() - since > TYPING_TIMEOUT_MS
+          set((s) => ({
+            messages: merge(s.messages, data.messages),
+            online: data.online,
+            email: data.email,
+            handler: data.handler,
+            waitingSince: answered || expired(s.waitingSince) ? null : s.waitingSince,
+          }))
         } catch (error) {
           // a token the Worker no longer knows: start over instead of failing forever
-          if (error instanceof ChatError && error.status === 401) set({ token: null, email: null, messages: [], lastSeenId: 0 })
+          if (error instanceof ChatError && error.status === 401) {
+            set({ token: null, email: null, messages: [], lastSeenId: 0, handler: 'bot', waitingSince: null })
+          }
         }
       },
 
@@ -81,14 +99,19 @@ export const useChatStore = create<ChatState>()(
         if (!message || sending) return false
         set({ sending: true, error: null })
         try {
+          let handler: Handler
           if (token) {
             const data = await chatApi.send(token, message)
+            handler = data.handler
             set((s) => ({ messages: merge(s.messages, [data.message]) }))
           } else {
             if (!turnstileToken) throw new ChatError('captcha_required', 400)
             const data = await chatApi.start(message, locale, turnstileToken)
+            handler = data.handler
             set({ token: data.token, messages: data.messages, turnstileToken: null })
           }
+          // the assistant answers a moment later; the widget shows it typing meanwhile
+          set({ handler, waitingSince: handler === 'bot' ? Date.now() : null })
           return true
         } catch (error) {
           const code = errorCode(error)

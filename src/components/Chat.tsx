@@ -9,11 +9,14 @@ import { Turnstile } from './Turnstile'
 
 const OPEN_POLL_MS = 4000
 const CLOSED_POLL_MS = 60000
+/** While the assistant is writing, its answer is a second or two away */
+const WAITING_POLL_MS = 1500
 
 /** Asks the Worker for news on an interval, but never while the tab is hidden */
 function usePolling() {
   const open = useChatStore((s) => s.open)
   const hasConversation = useChatStore((s) => s.token !== null)
+  const waiting = useChatStore((s) => s.waitingSince !== null)
   const refresh = useChatStore((s) => s.refresh)
 
   useEffect(() => {
@@ -23,13 +26,13 @@ function usePolling() {
       if (!document.hidden) void refresh()
     }
     tick()
-    const id = setInterval(tick, open ? OPEN_POLL_MS : CLOSED_POLL_MS)
+    const id = setInterval(tick, waiting ? WAITING_POLL_MS : open ? OPEN_POLL_MS : CLOSED_POLL_MS)
     document.addEventListener('visibilitychange', tick)
     return () => {
       clearInterval(id)
       document.removeEventListener('visibilitychange', tick)
     }
-  }, [open, hasConversation, refresh])
+  }, [open, hasConversation, waiting, refresh])
 }
 
 function EmailForm() {
@@ -81,6 +84,8 @@ function ChatPanel() {
   const theme = useSiteStore((s) => s.theme)
   const messages = useChatStore((s) => s.messages)
   const online = useChatStore((s) => s.online)
+  const handler = useChatStore((s) => s.handler)
+  const typing = useChatStore((s) => s.waitingSince !== null)
   const hasConversation = useChatStore((s) => s.token !== null)
   const sending = useChatStore((s) => s.sending)
   const error = useChatStore((s) => s.error)
@@ -103,7 +108,7 @@ function ChatPanel() {
   useEffect(() => {
     markSeen()
     listRef.current?.scrollTo({ top: listRef.current.scrollHeight })
-  }, [messages, markSeen])
+  }, [messages, typing, markSeen])
 
   const waitingForCaptcha = !hasConversation && !turnstileToken
 
@@ -147,15 +152,24 @@ function ChatPanel() {
           <li key={m.id} className={`chat__message is-${m.sender}`}>
             <p>{m.body}</p>
             <time dateTime={new Date(m.createdAt).toISOString()}>
-              {m.sender === 'visitor' ? `${t.chat.you} · ` : ''}
+              {m.sender === 'visitor' ? `${t.chat.you} · ` : m.sender === 'bot' ? `${t.chat.assistant} · ` : ''}
               {time(m.createdAt)}
             </time>
           </li>
         ))}
+        {typing && (
+          <li className="chat__message is-bot chat__typing" aria-label={t.chat.typing}>
+            <p aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </p>
+          </li>
+        )}
       </ol>
 
       <div className="chat__foot">
-        {hasConversation && !online && <EmailForm />}
+        {hasConversation && handler === 'owner' && !online && <EmailForm />}
         {!hasConversation && <p className="chat__note">{t.chat.privacy}</p>}
         {!hasConversation && <Turnstile key={captchaNonce} locale={locale} theme={theme} onToken={onToken} />}
         {error && (

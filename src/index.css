@@ -1405,6 +1405,35 @@ h3 {
   font-size: 0.7rem;
 }
 
+.chat__typing p {
+  display: flex;
+  align-self: flex-start;
+  gap: 5px;
+  padding: 13px 14px;
+}
+
+.chat__typing span {
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+  animation: chat-typing 1.2s steps(2) infinite;
+}
+
+.chat__typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.chat__typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes chat-typing {
+  50% {
+    transform: translateY(-3px);
+    background: var(--accent);
+  }
+}
+
 .chat__foot {
   display: flex;
   flex-direction: column;
