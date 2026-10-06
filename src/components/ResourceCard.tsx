@@ -23,7 +23,12 @@ const icons: Record<ResourceCategory, React.ReactNode> = {
       <circle cx="12" cy="12" r="0.8" fill="currentColor" />
     </>
   ),
+  projects: <path d="M3 6h7l2 2h9v11H3zM10 12l-2 2 2 2M14 12l2 2-2 2" />,
+  community: <path d="M4 5h11v8H9l-4 3v-3H4zM15 9h5v8h-1v3l-4-3h-5v-2" />,
 }
+
+/** Projects and communities sit outside the workflow, so they get no stage or reference tag */
+const untagged: ResourceCategory[] = ['projects', 'community']
 
 export function ResourceCard({ resource: r, highlighted }: { resource: Resource; highlighted: boolean }) {
   const { locale, t } = useMessages()
@@ -43,7 +48,11 @@ export function ResourceCard({ resource: r, highlighted }: { resource: Resource;
           <h3 className="mono">{r.name}</h3>
           <span className="resource__category">
             {t.resources.categories[r.category]}
-            {r.stage ? ` · ${t.resources.stages[r.stage].name}` : ` · ${t.resources.reference}`}
+            {r.stage
+              ? ` · ${t.resources.stages[r.stage].name}`
+              : untagged.includes(r.category)
+                ? ''
+                : ` · ${t.resources.reference}`}
           </span>
         </div>
       </header>

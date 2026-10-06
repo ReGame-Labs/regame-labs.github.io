@@ -1050,6 +1050,14 @@ h3 {
   color: var(--teal);
 }
 
+.resource--projects .resource__icon {
+  color: var(--success);
+}
+
+.resource--community .resource__icon {
+  color: var(--warning);
+}
+
 .resource__title {
   min-width: 0;
 }

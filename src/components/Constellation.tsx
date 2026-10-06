@@ -13,7 +13,17 @@ const positions: Record<Stage, { x: number; y: number }> = {
   track: { x: 93, y: 30 },
 }
 
-const toolsAt = (stage: Stage) => resources.filter((r) => r.stage === stage)
+/** The tools of a stage, the ones our projects use first */
+const toolsAt = (stage: Stage) =>
+  resources.filter((r) => r.stage === stage).sort((a, b) => Number(b.used) - Number(a.used))
+
+/** The first few tool names of a stage; the rest show up as a count to keep the map readable */
+const MAX_NAMES = 3
+const toolList = (stage: Stage) => {
+  const names = toolsAt(stage).map((r) => r.name)
+  const rest = names.length - MAX_NAMES
+  return names.slice(0, MAX_NAMES).join(' · ') + (rest > 0 ? ` +${rest}` : '')
+}
 
 export function Constellation() {
   const { t } = useMessages()
@@ -41,7 +51,6 @@ export function Constellation() {
 
         <ol className="constellation__stars">
           {stages.map((s, i) => {
-            const tools = toolsAt(s)
             return (
               <li key={s} style={{ left: `${positions[s].x}%`, top: `${positions[s].y}%` }}>
                 <button
@@ -59,7 +68,7 @@ export function Constellation() {
                     <span className="star__step mono">0{i + 1}</span>
                     {t.resources.stages[s].name}
                   </span>
-                  <span className="star__tools">{tools.map((r) => r.name).join(' · ')}</span>
+                  <span className="star__tools">{toolList(s)}</span>
                 </button>
               </li>
             )

@@ -5,7 +5,7 @@ import { useMessages } from '../store/useSiteStore'
 import { Constellation } from './Constellation'
 import { ResourceCard } from './ResourceCard'
 
-const categories: (ResourceCategory | 'all')[] = ['all', 'docs', 'analysis', 'debug', 'matching']
+const categories: (ResourceCategory | 'all')[] = ['all', 'docs', 'analysis', 'debug', 'matching', 'projects', 'community']
 
 export function Resources() {
   const { locale, t } = useMessages()
