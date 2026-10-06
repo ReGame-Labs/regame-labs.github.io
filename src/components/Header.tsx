@@ -21,6 +21,7 @@ export function Header() {
         <nav className="header__nav">
           <a href="#projects">{t.nav.projects}</a>
           <a href="#approach">{t.nav.approach}</a>
+          <a href="#resources">{t.nav.resources}</a>
           <a href={`https://github.com/${ORG}`} target="_blank" rel="noreferrer">
             {t.nav.github}
           </a>

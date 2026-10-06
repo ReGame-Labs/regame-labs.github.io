@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { ProjectCard } from './components/ProjectCard'
+import { Resources } from './components/Resources'
+import { Starfield } from './components/Starfield'
 import { projects } from './data/projects'
 import { useMessages, useSiteStore } from './store/useSiteStore'
 
@@ -24,6 +26,7 @@ export default function App() {
 
   return (
     <>
+      <Starfield theme={theme} />
       <Header />
       <main>
         <Hero />
@@ -54,6 +57,8 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <Resources />
       </main>
 
       <footer className="footer">

@@ -1,6 +1,8 @@
 import { ORG, projects } from '../data/projects'
 import { formatNumber } from '../lib/i18n'
+import { planetSprite, satelliteSprite } from '../lib/pixels'
 import { useMessages, useSiteStore } from '../store/useSiteStore'
+import { PixelSprite } from './PixelSprite'
 
 export function Hero() {
   const { locale, t } = useMessages()
@@ -11,7 +13,8 @@ export function Hero() {
 
   return (
     <section className="hero" id="top">
-      <div className="container">
+      <div className="container hero__inner">
+        <div className="hero__copy">
         <p className="eyebrow">{t.hero.eyebrow}</p>
         <h1>{t.hero.title}</h1>
         <p className="hero__lead">{t.hero.lead}</p>
@@ -37,6 +40,13 @@ export function Hero() {
             <dd>{formatNumber(functions, locale)}</dd>
           </div>
         </dl>
+        </div>
+        <div className="hero__art" aria-hidden="true">
+          <PixelSprite make={planetSprite} size={336} className="planet" />
+          <div className="orbit">
+            <PixelSprite make={satelliteSprite} size={44} className="satellite" />
+          </div>
+        </div>
       </div>
     </section>
   )

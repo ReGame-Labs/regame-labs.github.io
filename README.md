@@ -22,9 +22,12 @@ npm run dev
 | Path | Contents |
 |---|---|
 | `src/data/projects.ts` | The projects, their releases and the progress snapshot |
+| `src/data/resources.ts` | The Resources section: tools, references and where each fits |
 | `src/store/useSiteStore.ts` | Global state (Zustand): language, theme and decomp.dev progress |
+| `src/store/useResourceStore.ts` | The Resources filters (Zustand): category, stage, search |
 | `src/lib/i18n.ts` | Spanish and English text |
-| `src/components/` | Header, hero and project cards |
+| `src/lib/pixels.ts` | The pixel-art sprites: logo, planet, satellite |
+| `src/components/` | Header, hero, starfield, project cards and resources |
 
 To add a project, add an entry to `src/data/projects.ts` with its repository,
 its releases (the executable name is the version id on decomp.dev) and a

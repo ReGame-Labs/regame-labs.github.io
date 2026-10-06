@@ -1,9 +1,10 @@
 import type { Region } from '../data/projects'
+import type { ResourceCategory, Stage } from '../data/resources'
 
 export type Locale = 'es' | 'en'
 
 const es = {
-  nav: { projects: 'Proyectos', approach: 'Cómo trabajamos', github: 'GitHub' },
+  nav: { projects: 'Proyectos', approach: 'Cómo trabajamos', resources: 'Recursos', github: 'GitHub' },
   hero: {
     eyebrow: 'Decompilación de PlayStation',
     title: 'Devolvemos los clásicos a su código fuente.',
@@ -48,6 +49,37 @@ const es = {
       },
     ],
   },
+  resources: {
+    title: 'Recursos',
+    lead: 'Las herramientas y referencias que usa la comunidad de decompilación. Recorre la constelación para ver dónde encaja cada una, o filtra y abre cada tarjeta para saber qué hace.',
+    mapTitle: 'La ruta de un match',
+    mapHint: 'Toca una estrella para ver sus herramientas',
+    search: 'Buscar herramienta…',
+    all: 'Todos',
+    onlyUsed: 'Solo las que usamos',
+    used: 'La usamos',
+    more: 'Qué hace',
+    less: 'Menos',
+    visit: 'Abrir',
+    count: (n: number) => (n === 1 ? '1 recurso' : `${n} recursos`),
+    empty: 'Ninguna herramienta coincide con esos filtros.',
+    clear: 'Quitar filtros',
+    reference: 'Referencia',
+    categories: {
+      docs: 'Documentación',
+      analysis: 'Análisis binario',
+      debug: 'Info de depuración',
+      matching: 'Decompilación matching',
+    } satisfies Record<ResourceCategory, string>,
+    stages: {
+      explore: { name: 'Explorar', blurb: 'Entender el binario: qué hay y dónde.' },
+      split: { name: 'Dividir', blurb: 'Cortar el ejecutable en un proyecto que recompila.' },
+      decompile: { name: 'Decompilar', blurb: 'Un primer borrador en C de cada función.' },
+      match: { name: 'Igualar', blurb: 'Ajustar el C hasta que el compilador dé lo mismo.' },
+      diff: { name: 'Comparar', blurb: 'Ver instrucción a instrucción qué falta.' },
+      track: { name: 'Medir', blurb: 'Publicar cuánto del juego ya es C.' },
+    } satisfies Record<Stage, { name: string; blurb: string }>,
+  },
   footer: {
     note: 'Proyectos de preservación y estudio. No distribuimos datos ni binarios de los juegos.',
     trademarks: 'Los nombres de los juegos son marcas de sus respectivos dueños.',
@@ -60,7 +92,7 @@ const es = {
 export type Messages = typeof es
 
 const en: Messages = {
-  nav: { projects: 'Projects', approach: 'How we work', github: 'GitHub' },
+  nav: { projects: 'Projects', approach: 'How we work', resources: 'Resources', github: 'GitHub' },
   hero: {
     eyebrow: 'PlayStation decompilation',
     title: 'Bringing the classics back to source.',
@@ -104,6 +136,37 @@ const en: Messages = {
         body: 'objdiff measures every build and decomp.dev publishes the code, data and function progress of each release.',
       },
     ],
+  },
+  resources: {
+    title: 'Resources',
+    lead: 'The tools and references the decompilation community relies on. Travel the constellation to see where each one fits, or filter and open any card to learn what it does.',
+    mapTitle: 'The road to a match',
+    mapHint: 'Tap a star to see its tools',
+    search: 'Search tools…',
+    all: 'All',
+    onlyUsed: 'Only the ones we use',
+    used: 'We use it',
+    more: 'What it does',
+    less: 'Less',
+    visit: 'Open',
+    count: (n: number) => (n === 1 ? '1 resource' : `${n} resources`),
+    empty: 'No tool matches those filters.',
+    clear: 'Clear filters',
+    reference: 'Reference',
+    categories: {
+      docs: 'Documentation',
+      analysis: 'Binary analysis',
+      debug: 'Debug info',
+      matching: 'Matching decompilation',
+    },
+    stages: {
+      explore: { name: 'Explore', blurb: 'Understand the binary: what is in it and where.' },
+      split: { name: 'Split', blurb: 'Cut the executable into a project that rebuilds.' },
+      decompile: { name: 'Decompile', blurb: 'A first C draft of every function.' },
+      match: { name: 'Match', blurb: 'Tune the C until the compiler gives the same thing.' },
+      diff: { name: 'Diff', blurb: 'See instruction by instruction what is missing.' },
+      track: { name: 'Track', blurb: 'Publish how much of the game is C already.' },
+    },
   },
   footer: {
     note: 'Preservation and research projects. We distribute no game data or binaries.',
