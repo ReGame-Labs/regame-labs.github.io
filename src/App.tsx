@@ -24,6 +24,11 @@ export default function App() {
 
   useEffect(loadProgress, [loadProgress])
 
+  // the sections only exist once React renders, after the browser looked for the #hash
+  useEffect(() => {
+    if (location.hash) document.querySelector(location.hash)?.scrollIntoView()
+  }, [])
+
   return (
     <>
       <Starfield theme={theme} />
