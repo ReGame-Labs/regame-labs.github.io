@@ -523,6 +523,11 @@ h3 {
   gap: 32px;
 }
 
+/* an odd last card takes the whole row instead of leaving half of it empty */
+.project:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .project {
   display: flex;
   flex-direction: column;

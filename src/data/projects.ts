@@ -91,6 +91,26 @@ export const projects: Project[] = [
       },
     },
   },
+  {
+    repo: 'dtbe_decomp',
+    title: 'Digimon Rumble Arena',
+    platform: 'PlayStation',
+    year: 2001,
+    compilers: ['GCC 2.95.2'],
+    versions: [{ exe: 'SLPS_033.57', region: 'jp', title: 'Digimon Tamers: Battle Evolution', units: 60 }],
+    fakeMatches: 0,
+    hacks: 0,
+    summary: {
+      es: 'El juego de pelea de Digimon, desde su edición japonesa. En curso: el build ya da el ejecutable idéntico y cada función pasa del ensamblador a C sin perder el match.',
+      en: 'The Digimon fighting game, from its Japanese release. In progress: the build already gives back the identical executable, and each function moves from assembly to C keeping the match.',
+    },
+    snapshot: {
+      date: '2026-10-08',
+      measures: {
+        'SLPS_033.57': { codePercent: 1.54, dataPercent: 0, matchedFunctions: 43, totalFunctions: 1120 },
+      },
+    },
+  },
 ]
 
 export const repoUrl = (p: Project) => `https://github.com/${ORG}/${p.repo}`
