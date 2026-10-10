@@ -111,6 +111,26 @@ export const projects: Project[] = [
       },
     },
   },
+  {
+    repo: 'dwds_decomp',
+    title: 'Digimon World DS',
+    platform: 'NDS',
+    year: 2006,
+    compilers: ['mwccarm 1.2/sp4'],
+    versions: [{ exe: 'usa', region: 'us', units: 279 }],
+    fakeMatches: 0,
+    hacks: 3,
+    summary: {
+      es: 'El RPG portátil de Digimon, desde su edición norteamericana. En curso: el build ya da cada módulo de la ROM idéntico byte a byte y cada función que pasa a C reemplaza su parte del original sin perder el match.',
+      en: 'The handheld Digimon RPG, from its North American release. In progress: the build already gives back every module of the ROM byte for byte, and each function moved to C replaces its piece of the original keeping the match.',
+    },
+    snapshot: {
+      date: '2026-10-10',
+      measures: {
+        usa: { codePercent: 14.42, dataPercent: 0, matchedFunctions: 2386, totalFunctions: 7376 },
+      },
+    },
+  },
 ]
 
 export const repoUrl = (p: Project) => `https://github.com/${ORG}/${p.repo}`

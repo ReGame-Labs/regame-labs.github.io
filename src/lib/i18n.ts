@@ -8,7 +8,7 @@ const es = {
   hero: {
     eyebrow: 'Decompilación de videojuegos',
     title: 'Devolvemos los clásicos a su código fuente.',
-    lead: 'ReGame Labs reconstruye juegos de PlayStation en C que, al compilarse con las herramientas originales, produce los mismos binarios byte a byte.',
+    lead: 'ReGame Labs reconstruye juegos clásicos en C que, al compilarse con las herramientas originales, produce los mismos binarios byte a byte.',
     ctaProjects: 'Ver proyectos',
     ctaGithub: 'Organización en GitHub',
   },
@@ -138,7 +138,7 @@ const en: Messages = {
   hero: {
     eyebrow: 'Game decompilation',
     title: 'Bringing the classics back to source.',
-    lead: 'ReGame Labs rebuilds PlayStation games as C source that, compiled with the original tools, produces the very same binaries, byte for byte.',
+    lead: 'ReGame Labs rebuilds classic games as C source that, compiled with the original tools, produces the very same binaries, byte for byte.',
     ctaProjects: 'See projects',
     ctaGithub: 'Organization on GitHub',
   },
